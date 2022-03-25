@@ -22,7 +22,8 @@ int main()
 	std::cout << "TWITCASTING DOWNLOAD" << std::endl;
 	std::cout << "====================" << std::endl;
 	if (!access("C:/Program Files (x86)/ffmpeg/ffmpeg.exe", F_OK) == 0) {
-		std::cout << "'ffmpeg.exe' not found! Place it in C:/Program Files (x86)/ffmpeg/ffmpeg.exe \n";
+		std::cout << "!!!!ERROR!!!!\nffmpeg.exe not found!\nPlease, place it in C:/Program Files (x86)/ffmpeg/ffmpeg.exe \n";
+		std::cin.get();
 		exit(0);
 	}
 	else {
