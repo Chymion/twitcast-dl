@@ -50,9 +50,11 @@ int main()
 		if (input[i] == '\0') break;
 		ressed.push_back(input[i]);
 	}
-
-	std::string request = "ffmpeg -protocol_whitelist file,http,https,tcp,tls,crypto -user_agent \"" + ressed + "\" -headers \"Origin: https://twitcasting.tv\" -i " + s + " -c copy " + nameOut + ".mkv ";
-
+#ifdef _WIN32
+	std::string request = "%ProgramFiles(x86)%/ffmpeg/ffmpeg.exe -protocol_whitelist file,http,https,tcp,tls,crypto -user_agent \"" + ressed + "\" -headers \"Origin: https://twitcasting.tv\" -i " + s + " -c copy " + nameOut + ".mkv ";
+#else
+    std::string request = "ffmpeg -protocol_whitelist file,http,https,tcp,tls,crypto -user_agent \"" + ressed + "\" -headers \"Origin: https://twitcasting.tv\" -i " + s + " -c copy " + nameOut + ".mkv ";
+#endif
 	std::cout << request << std::endl;
 
 	system(request.c_str());
