@@ -103,6 +103,7 @@ int main()
 
 	}
 #else
+	begin:
 	system("clear");
 	std::string s;
 	std::cout << "====================" << std::endl;
@@ -111,7 +112,7 @@ int main()
 	std::cout << "Paste this link in your browser's console \n\nlet a=[];for(let _ of JSON.parse(document.querySelector(\"video\")[\"dataset\"][\"moviePlaylist\"])[2])a.push(_.source?.url);console.log(a.join(\"\\n\"))\n\n";
 	std::cout << "Enter the url of the video: ";
 	std::cin >> s;
-	std::cout << "Name of the output video: ";
+	std::cout << "Enter the name of the output video ('.mkv' will be added): ";
 	std::string nameOut;
 	std::cin >> nameOut;
 	std::cin.ignore();
@@ -143,6 +144,44 @@ int main()
 	}
 	std::string request = "ffmpeg -protocol_whitelist file,http,https,tcp,tls,crypto -user_agent \"" + ressed + "\" -headers \"Origin: https://twitcasting.tv\" -i " + s + " -c copy " + nameOut + ".mkv ";
 	system(request.c_str());
+	system("clear");
+	std::cout << "===================\nDownload completed!\n===================\n";
+	std::cout << "Do you want an mp4 version? [y/n]: ";
+	std::string resp;
+	std::cin >> resp;
+	std::cin.ignore();
+	if (resp == "y" ||  resp == "Y") {
+		std::string req = "ffmpeg -i " + nameOut + ".mkv -codec copy " + nameOut + ".mp4";
+		system(req.c_str());
+		std::string dest = "rm " + nameOut + ".mkv";
+		system(dest.c_str());
+		system("clear");
+		std::cout << "Do you want to download an other video? [y/n]: ";
+		std::string resp2;
+		std::cin >> resp2;
+		std::cin.ignore();
+		if (resp2 == "y" || resp2 == "Y") {
+				goto begin;
+			}
+			else
+			{
+				exit(0);
+			}
+		}
+		else
+		{
+			std::cout << "Do you want to download an other video? [y/n]: ";
+			std::string resp2;
+			std::cin >> resp2;
+			std::cin.ignore();
+			if (resp2 == "y" || resp2 == "Y") {
+				goto begin;
+			}
+			else
+			{
+				exit(0);
+			}
+		}
 #endif
 
 	return 0;
