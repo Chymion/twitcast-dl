@@ -152,6 +152,17 @@ int main()
 	char input[200] = { 0 };
 	std::cin.getline(input, 200);
 
+	if (s.find("&spm=1") != std::string::npos)
+	{		
+			int pos = s.find("&spm=1");
+			std::string ss = "&spm=1";
+			if (pos != std::string::npos)
+			{
+				s = s.erase(pos, ss.length());
+				
+			}		
+	}
+	
 	std::string g;
 	for (int i = 0; i < s.length(); i++)
 	{
