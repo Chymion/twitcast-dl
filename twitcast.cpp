@@ -1,6 +1,6 @@
 /*
 This code is based on Niseyami's program: https://github.com/niseyami/twitcasting-dl
-Author: Vivian Chantraine
+Author: Orane Adjali
 */
 #include <iostream>
 #include <string>
@@ -14,7 +14,7 @@ Author: Vivian Chantraine
 
 int main()
 {
-#ifdef _WIN32
+	#ifdef _WIN32
 	begin:
 	system("cls");
 	std::string s;
@@ -33,39 +33,27 @@ int main()
 		std::cout << "Enter the user-agent of your browser: ";
 		char input[200] = { 0 };
 		std::cin.getline(input, 200);
-
-		if (s.find("&spm=1") != std::string::npos)
-		{
-			
+		
+		if (s.find("&spm=1") != std::string::npos) {
 			int pos = s.find("&spm=1");
 			std::string ss = "&spm=1";
-			if (pos != std::string::npos)
-			{
+			if (pos != std::string::npos){
 				s = s.erase(pos, ss.length());
-				
 			}
-			
 		}
-
+		
 		std::string g;
-		for (int i = 0; i < s.length(); i++)
-		{
-			if (s[i] != '\\')
-			{
+		for (int i = 0; i < s.length(); i++) {
+			if (s[i] != '\\') {
 				g += s[i];
 			}
-			else
-			{
-
-			}
 		}
-
+		
 		std::string ressed;
-
+		
 		std::cout << input << std::endl;
-
-		for (int i = 0; i < sizeof(input); i++)
-		{
+		
+		for (int i = 0; i < sizeof(input); i++){
 			if (input[i] == '\0') break;
 			ressed.push_back(input[i]);
 		}
@@ -73,11 +61,7 @@ int main()
 			std::cout << "You have to put ffmpeg.exe in Program Files x86, not Program Files..." << std::endl;
 			std::cin.get();
 			exit(0);
-			//std::string request = "\"\"%ProgramFiles%/ffmpeg/ffmpeg.exe\" -protocol_whitelist file,http,https,tcp,tls,crypto -user_agent \"" + ressed + "\" -headers \"Origin: https://twitcasting.tv\" -i " + s + " -c copy " + nameOut + ".mkv \"";
-			//system(request.c_str());
-			//std::cin.get();
-		}
-		else if (access("C:/Program Files (x86)/ffmpeg/ffmpeg.exe", F_OK) == 0) {
+		} else if (access("C:/Program Files (x86)/ffmpeg/ffmpeg.exe", F_OK) == 0) {
 			std::string request = "\"\"%ProgramFiles(x86)%/ffmpeg/ffmpeg.exe\" -protocol_whitelist file,http,https,tcp,tls,crypto -user_agent \"" + ressed + "\" -headers \"Origin: https://twitcasting.tv\" -i " + s + " -c copy " + nameOut + ".mkv \"";
 			system(request.c_str());
 			std::cin.get();
@@ -108,33 +92,26 @@ int main()
 			std::cin.ignore();
 			if (resp2 == "y" || resp2 == "Y") {
 				goto begin;
-			}
-			else
-			{
+			} else {
 				exit(0);
 			}
-		}
-		else
-		{
+		} else {
 			std::cout << "Do you want to download an other video? [y/n]: ";
 			std::string resp2;
 			std::cin >> resp2;
 			std::cin.ignore();
 			if (resp2 == "y" || resp2 == "Y") {
 				goto begin;
-			}
-			else
-			{
+			} else {
 				exit(0);
 			}
 		}
-	}
-	else {
+	} else {
 		std::cout << "!!!!ERROR!!!!\nffmpeg.exe not found!\nPlease, place it in C:/Program Files (x86)/ffmpeg/ffmpeg.exe or C:/Program Files/ffmpeg/ffmpeg.exe \n";
 		std::cin.get();
 		exit(0);
 	}
-#else
+	#else
 	begin:
 	system("clear");
 	std::string s;
@@ -151,37 +128,27 @@ int main()
 	std::cout << "Enter the user-agent of your browser: ";
 	char input[200] = { 0 };
 	std::cin.getline(input, 200);
-
-	if (s.find("&spm=1") != std::string::npos)
-	{		
-			int pos = s.find("&spm=1");
-			std::string ss = "&spm=1";
-			if (pos != std::string::npos)
-			{
-				s = s.erase(pos, ss.length());
-				
-			}		
+	
+	if (s.find("&spm=1") != std::string::npos) {		
+		int pos = s.find("&spm=1");
+		std::string ss = "&spm=1";
+		if (pos != std::string::npos) {
+			s = s.erase(pos, ss.length());
+		}		
 	}
 	
 	std::string g;
-	for (int i = 0; i < s.length(); i++)
-	{
-		if (s[i] != '\\')
-		{
+	for (int i = 0; i < s.length(); i++) {
+		if (s[i] != '\\'){
 			g += s[i];
 		}
-		else
-		{
-
-		}
 	}
-
+	
 	std::string ressed;
-
+	
 	std::cout << input << std::endl;
-
-	for (int i = 0; i < sizeof(input); i++)
-	{
+	
+	for (int i = 0; i < sizeof(input); i++) {
 		if (input[i] == '\0') break;
 		ressed.push_back(input[i]);
 	}
@@ -204,28 +171,21 @@ int main()
 		std::cin >> resp2;
 		std::cin.ignore();
 		if (resp2 == "y" || resp2 == "Y") {
-				goto begin;
-			}
-			else
-			{
-				exit(0);
-			}
+			goto begin;
+		} else {
+			exit(0);
 		}
-		else
-		{
-			std::cout << "Do you want to download an other video? [y/n]: ";
-			std::string resp2;
-			std::cin >> resp2;
-			std::cin.ignore();
-			if (resp2 == "y" || resp2 == "Y") {
-				goto begin;
-			}
-			else
-			{
-				exit(0);
-			}
+	} else {
+		std::cout << "Do you want to download an other video? [y/n]: ";
+		std::string resp2;
+		std::cin >> resp2;
+		std::cin.ignore();
+		if (resp2 == "y" || resp2 == "Y") {
+			goto begin;
+		} else {
+			exit(0);
 		}
-#endif
-
+	}
+	#endif
 	return 0;
 }
